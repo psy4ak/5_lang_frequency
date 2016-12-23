@@ -1,5 +1,4 @@
 import re
-from collections import Counter
 
 
 def load_data(filepath):
@@ -8,8 +7,15 @@ def load_data(filepath):
 
 
 def get_most_frequent_words(text):
-    top_text_words = Counter(text).most_common(10)
-    return top_text_words
+    wordcount = {}
+    for word in text:
+        if word not in wordcount:
+            wordcount[word] = 1
+        else:
+            wordcount[word] += 1
+    words_list = list(wordcount.items())
+    sorted_list = sorted(words_list, key=lambda item: item[1], reverse=True)
+    return sorted_list[:9]
 
 
 if __name__ == '__main__':
